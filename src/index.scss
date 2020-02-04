@@ -12,23 +12,30 @@ code {
     monospace;
 }
 
+ul {
 
-li {
-  transition: 0.2s;
-
-  &:hover {
-    z-index: 1;
-    transform: scale(1.05)
+  &:hover li {
+    opacity: 0.5;
   }
 
-  div {
-    height: 100% !important;
-    width: 100% !important;
-
-    img {
-      object-fit: cover;
+  li {
+    transition: 0.2s ease-in;
+  
+    &:hover {
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1.05)
+    }
+  
+    div {
       height: 100% !important;
       width: 100% !important;
+  
+      img {
+        object-fit: cover;
+        height: 100% !important;
+        width: 100% !important;
+      }
     }
   }
 }
