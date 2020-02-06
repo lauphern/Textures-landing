@@ -13,6 +13,8 @@ code {
     monospace;
 }
 
+
+
 .btn-group {
 
   &:hover {
@@ -27,12 +29,21 @@ code {
     color: black;
     font-weight: bold;
     font-size: 2em;
-    text-shadow:
-        -1px -1px 0 #fff,  
-        1px -1px 0 #fff,
-        -1px 1px 0 #fff,
-        1px 1px 0 #fff;
+    // text-shadow:
+    //     -1px -1px 0 #fff,  
+    //     1px -1px 0 #fff,
+    //     -1px 1px 0 #fff,
+    //     1px 1px 0 #fff;
     transition: all 0.3s;
+    a {
+      text-decoration: none;
+      color: black;
+      text-shadow:
+            -1px -1px 0 #fff,  
+            1px -1px 0 #fff,
+            -1px 1px 0 #fff,
+            1px 1px 0 #fff;
+    }
 
     div {
       display: none;
@@ -40,9 +51,12 @@ code {
   
     &:hover {
       width: 50vw;
-      text-shadow: none;
-      color: white;
       font-size: 3em;
+
+      a {
+        color: white;
+        text-shadow: none;
+      }
 
       & > span > div:nth-of-type(1) {
         display: block;

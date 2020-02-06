@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Switch, Route, NavLink } from "react-router-dom";
 import {
   CssBaseline,
   Grid,
@@ -138,12 +139,14 @@ const useStyles = makeStyles(theme => ({
   },
   navTitle: {
     fontWeight: "bold",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    textDecoration: "none",
+    color: "white"
   },
   mainMenu: {
     height: "100vh",
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center"
   },
   headerContainer: {
@@ -176,131 +179,165 @@ function parallaxEffect() {
     backgroundImages.forEach(div => {
       div.style.transform =
         "translateX(-" +
-        (50 + pageX / 25) +
+        (10 + pageX / 100) +
         "%) translateY(-" +
-        (50 + pageY / 25) +
+        (10 + pageY / 100) +
         "%)";
     });
     overlays.forEach(div => {
       div.style.transform =
         "translateX(-" +
-        (50 - pageX / 25) +
+        (10 - pageX / 100) +
         "%) translateY(-" +
-        (50 - pageY / 25) +
+        (10 - pageY / 100) +
         "%)";
     });
   });
 }
 
-function App() {
-  const classes = useStyles();
-  let imagesCopy = [...imagesList].slice(1, imagesList.length);
-  let tiles = imagesCopy.slice(0, imagesCopy.length - (imagesCopy.length % 3));
+const NavBar = props => {
+  return (
+    <Grid item xs={12}>
+      <AppBar className={props.classes.nav}>
+        <Typography variant="caption" align="center">
+          <Link
+            href="https://github.com/lauphern/Textures-landing.git"
+            color="inherit"
+            target="_blank"
+            rel="noopener"
+          >
+            Github
+          </Link>
+        </Typography>
+        <Typography
+          variant="h6"
+          align="center"
+        >
+          <NavLink className={props.classes.navTitle} to="/">Textures</NavLink>
+        </Typography>
+        <Typography variant="caption" align="center">
+          MaterialUI demo
+        </Typography>
+      </AppBar>
+    </Grid>
+  );
+};
+
+const Home = props => {
   useEffect(() => {
     parallaxEffect();
   });
   return (
+    <Grid item xs={12}>
+      <Container
+        disableGutters
+        className={`${props.classes.headerContainer} ${props.classes.mainMenu}`}
+      >
+        <ButtonGroup
+          variant="text"
+          color="primary"
+          aria-label="text primary button group"
+          fullWidth
+          size="small"
+          className="btn-group"
+        >
+          <Button className="btn-menu">
+            <NavLink to="/hero">One</NavLink>
+            <div></div>
+            <div className="overlay"></div>
+          </Button>
+          <Button className="btn-menu">
+            <NavLink to="/image-grid">Two</NavLink>
+            <div></div>
+            <div className="overlay"></div>
+          </Button>
+          <Button className="btn-menu">
+            <NavLink to="/hero">Three</NavLink>
+            <div></div>
+            <div className="overlay"></div>
+          </Button>
+        </ButtonGroup>
+      </Container>
+    </Grid>
+  );
+};
+
+const Hero = props => {
+  return (
+    <Grid item xs={12} container className={props.classes.headerContainer}>
+      <Container component="header" className={props.classes.header}>
+        <Tooltip title={imagesList[0].credit}>
+          <img
+            className={props.classes.headerImg}
+            src={imagesList[0].src}
+            alt={imagesList[0].credit}
+          />
+        </Tooltip>
+        <Paper elevation={0}>
+          <Typography variant="body2" color="textSecondary" component="p">
+            This impressive paella is a perfect party dish and a fun meal to
+            cook together with your guests. Add 1 cup of frozen peas along with
+            the mussels, if you like.
+          </Typography>
+        </Paper>
+      </Container>
+    </Grid>
+  );
+};
+
+const ImageGrid = props => {
+  return (
+    <Grid item xs={12}>
+      <GridList
+        cellHeight={160}
+        className={props.classes.gridList}
+        cols={3}
+        spacing={10}
+      >
+        {props.tiles.map(tile => (
+          <Tooltip title={tile.credit} arrow>
+            <GridListTile
+              style={{
+                gridColumn: tile.gridColumn || null,
+                gridRow: tile.gridRow || null,
+                width: "100% !important",
+                height: "100% !important"
+              }}
+              key={tile.src}
+              cols={tile.cols || 1}
+              rows={tile.rows || 1}
+            >
+              <img src={tile.src} alt={tile.credit} />
+            </GridListTile>
+          </Tooltip>
+        ))}
+      </GridList>
+    </Grid>
+  );
+};
+
+function App() {
+  const classes = useStyles();
+  let imagesCopy = [...imagesList].slice(1, imagesList.length);
+  let tiles = imagesCopy.slice(0, imagesCopy.length - (imagesCopy.length % 3));
+
+  return (
     <>
       <CssBaseline />
       <div className="App">
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <AppBar className={classes.nav}>
-              <Typography variant="caption" align="center">
-                <Link
-                  href="https://github.com/lauphern/Textures-landing.git"
-                  color="inherit"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Github
-                </Link>
-              </Typography>
-              <Typography
-                className={classes.navTitle}
-                variant="h6"
-                align="center"
-              >
-                Textures
-              </Typography>
-              <Typography variant="caption" align="center">
-                MaterialUI demo
-              </Typography>
-            </AppBar>
-          </Grid>
-          <Grid item xs={12}>
-            <Container
-              disableGutters
-              className={`${classes.headerContainer} ${classes.mainMenu}`}
-            >
-              <ButtonGroup
-                variant="text"
-                color="primary"
-                aria-label="text primary button group"
-                fullWidth
-                size="small"
-                className="btn-group"
-              >
-                <Button className="btn-menu">
-                  One
-                  <div></div>
-                  <div className="overlay"></div>
-                </Button>
-                <Button className="btn-menu">
-                  Two
-                  <div></div>
-                  <div className="overlay"></div>
-                </Button>
-                <Button className="btn-menu">
-                  Three
-                  <div></div>
-                  <div className="overlay"></div>
-                </Button>
-              </ButtonGroup>
-            </Container>
-          </Grid>
-          <Grid item xs={12} container className={classes.headerContainer}>
-            <Container component="header" className={classes.header}>
-              <Tooltip title={imagesList[0].credit}>
-                <img
-                  className={classes.headerImg}
-                  src={imagesList[0].src}
-                  alt={imagesList[0].credit}
-                />
-              </Tooltip>
-              <Paper elevation={0}>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  This impressive paella is a perfect party dish and a fun meal
-                  to cook together with your guests. Add 1 cup of frozen peas
-                  along with the mussels, if you like.
-                </Typography>
-              </Paper>
-            </Container>
-          </Grid>
-          <Grid item xs={12}>
-            <GridList
-              cellHeight={160}
-              className={classes.gridList}
-              cols={3}
-              spacing={10}
-            >
-              {tiles.map(tile => (
-                <GridListTile
-                  style={{
-                    gridColumn: tile.gridColumn || null,
-                    gridRow: tile.gridRow || null,
-                    width: "100% !important",
-                    height: "100% !important"
-                  }}
-                  key={tile.src}
-                  cols={tile.cols || 1}
-                  rows={tile.rows || 1}
-                >
-                  <img src={tile.src} alt={tile.credit} />
-                </GridListTile>
-              ))}
-            </GridList>
-          </Grid>
+        <Grid container>
+          <NavBar classes={classes} />
+          <Switch>
+            <Route exact path="/">
+              <Home classes={classes} />
+            </Route>
+            <Route path="/hero">
+              <Hero classes={classes} />
+            </Route>
+            <Route path="/image-grid">
+              <ImageGrid classes={classes} tiles={tiles} />
+            </Route>
+          </Switch>
         </Grid>
       </div>
     </>
