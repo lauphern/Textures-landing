@@ -5,12 +5,92 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn-group {
+
+  &:hover {
+    .btn-menu {
+      width: 20vw;
+    }
+  }
+
+  .btn-menu {
+    position: relative;
+    text-transform: uppercase;
+    color: black;
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow:
+        -1px -1px 0 #fff,  
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff;
+    transition: all 0.3s;
+
+    div {
+      display: none;
+    }
+  
+    &:hover {
+      width: 50vw;
+      text-shadow: none;
+      color: white;
+      font-size: 3em;
+
+      & > span > div:nth-of-type(1) {
+        display: block;
+        position: absolute;
+        left: 50%;
+        z-index: -2;
+        width: 50px;
+        height: 70vh;
+        background-image: url(/pawel-czerwinski-UmzGrVna1P0-unsplash.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: show 0.3s ease;
+
+        
+      }
+      .overlay {
+        display: block;
+        position: relative;
+        left: -5px;
+        top: -5px;
+        z-index: -1;
+        width: 50px;
+        height: 70vh;
+        background-image: url(/pawel-czerwinski-UmzGrVna1P0-unsplash.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: show 0.3s ease;
+        filter: grayscale(80%) opacity(0.5);
+        mix-blend-mode: multiply;
+      }
+  
+      // &:after {
+      //   content: "";
+      //   position: absolute;
+      //   left: 50%;
+      //   z-index: -1;
+      //   width: 50px;
+      //   height: 70vh;
+      //   background-image: url(/pawel-czerwinski-UmzGrVna1P0-unsplash.jpg);
+      //   background-repeat: no-repeat;
+      //   background-size: cover;
+      //   animation: show 0.3s ease;
+      // }
+    }
+  }
+}
+
+
 
 ul {
 
@@ -37,5 +117,16 @@ ul {
         width: 100% !important;
       }
     }
+  }
+}
+
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

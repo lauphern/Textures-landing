@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CssBaseline,
   Grid,
@@ -12,7 +12,10 @@ import {
   Tooltip,
   Paper,
   Container,
-  Box
+  Box,
+  ButtonGroup,
+  Button,
+  Link
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -127,13 +130,21 @@ const imagesList = [
 
 const useStyles = makeStyles(theme => ({
   nav: {
-    height: "7vh",
-    justifyContent: "center",
+    height: "5vh",
+    padding: "0 10vw",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center"
   },
   navTitle: {
     fontWeight: "bold",
     textTransform: "uppercase"
+  },
+  mainMenu: {
+    height: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   headerContainer: {
     width: "100vw"
@@ -155,10 +166,39 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function parallaxEffect() {
+  let btnGroup = document.getElementsByClassName("btn-group")[0];
+  let backgroundImages = document.querySelectorAll(".btn-menu > span > div");
+  let overlays = document.querySelectorAll(".overlay");
+  btnGroup.addEventListener("mousemove", e => {
+    let pageX = e.clientX - window.innerWidth / 2;
+    let pageY = e.clientY - window.innerHeight / 2;
+    backgroundImages.forEach(div => {
+      div.style.transform =
+        "translateX(-" +
+        (50 + pageX / 25) +
+        "%) translateY(-" +
+        (50 + pageY / 25) +
+        "%)";
+    });
+    overlays.forEach(div => {
+      div.style.transform =
+        "translateX(-" +
+        (50 - pageX / 25) +
+        "%) translateY(-" +
+        (50 - pageY / 25) +
+        "%)";
+    });
+  });
+}
+
 function App() {
   const classes = useStyles();
-  let imagesCopy = [...imagesList].slice(1, imagesList.length)
-  let tiles = imagesCopy.slice(0, imagesCopy.length - (imagesCopy.length % 3))
+  let imagesCopy = [...imagesList].slice(1, imagesList.length);
+  let tiles = imagesCopy.slice(0, imagesCopy.length - (imagesCopy.length % 3));
+  useEffect(() => {
+    parallaxEffect();
+  });
   return (
     <>
       <CssBaseline />
@@ -166,6 +206,16 @@ function App() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <AppBar className={classes.nav}>
+              <Typography variant="caption" align="center">
+                <Link
+                  href="https://github.com/lauphern/Textures-landing.git"
+                  color="inherit"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Github
+                </Link>
+              </Typography>
               <Typography
                 className={classes.navTitle}
                 variant="h6"
@@ -173,7 +223,41 @@ function App() {
               >
                 Textures
               </Typography>
+              <Typography variant="caption" align="center">
+                MaterialUI demo
+              </Typography>
             </AppBar>
+          </Grid>
+          <Grid item xs={12}>
+            <Container
+              disableGutters
+              className={`${classes.headerContainer} ${classes.mainMenu}`}
+            >
+              <ButtonGroup
+                variant="text"
+                color="primary"
+                aria-label="text primary button group"
+                fullWidth
+                size="small"
+                className="btn-group"
+              >
+                <Button className="btn-menu">
+                  One
+                  <div></div>
+                  <div className="overlay"></div>
+                </Button>
+                <Button className="btn-menu">
+                  Two
+                  <div></div>
+                  <div className="overlay"></div>
+                </Button>
+                <Button className="btn-menu">
+                  Three
+                  <div></div>
+                  <div className="overlay"></div>
+                </Button>
+              </ButtonGroup>
+            </Container>
           </Grid>
           <Grid item xs={12} container className={classes.headerContainer}>
             <Container component="header" className={classes.header}>
