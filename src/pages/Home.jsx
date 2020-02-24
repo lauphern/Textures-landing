@@ -47,17 +47,17 @@ const Home = props => {
           className="btn-group"
         >
           <Button className="btn-menu">
-            <NavLink to="/hero">One</NavLink>
+            <NavLink to="/hero">Hero</NavLink>
             <div></div>
             <div className="overlay"></div>
           </Button>
           <Button className="btn-menu">
-            <NavLink to="/image-grid">Two</NavLink>
+            <NavLink to="/image-grid">Gallery</NavLink>
             <div></div>
             <div className="overlay"></div>
           </Button>
           <Button className="btn-menu">
-            <NavLink to="/hero">Three</NavLink>
+            <NavLink to="/parallax">Parallax</NavLink>
             <div></div>
             <div className="overlay"></div>
           </Button>

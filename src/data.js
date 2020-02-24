@@ -104,5 +104,9 @@ export const imagesList = [
     credit: "Photo by Julius Drost on Unsplash",
     cols: 1,
     rows: 1
+  },
+  {
+    src: "mohammad-ali-berenji-VcnNrujVwzM-unsplash-hq.jpg",
+    credit: "Photo by Mohammad Ali Berenji on Unsplash"
   }
 ];
