@@ -18,9 +18,6 @@ import { imagesList } from "./data";
 const theme = createMuiTheme({
   palette: {
     primary: { main: "#ff867c" }
-    // secondary: {
-    //   main: "#f44336"
-    // }
   },
   overrides: {
     MuiTooltip: {
@@ -34,6 +31,13 @@ const theme = createMuiTheme({
         padding: "5px 10px",
         fontWeight: "bold",
         color: "#fff"
+      }
+    },
+    MuiTypography: {
+      subtitle1: {
+        lineHeight: 2.5,
+        color: "white",
+        textAlign: "center"
       }
     }
   }
@@ -60,16 +64,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   headerContainer: {
-    width: "100vw"
+    width: "100vw",
+    height: "100vh"
   },
   header: {
     display: "flex",
-    flexDirection: "row-reverse",
     alignItems: "center",
-    justifyContent: "space-between"
-  },
-  headerImg: {
-    width: "50%"
+    justifyContent: "center",
+    background: `no-repeat center/cover url(${imagesList[16].src})`
   },
   gridList: {
     width: "100%",
@@ -81,7 +83,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
-  let imagesCopy = [...imagesList].slice(1, imagesList.length -1);
+  let imagesCopy = [...imagesList].slice(1, imagesList.length - 2);
   let tiles = imagesCopy.slice(0, imagesCopy.length - (imagesCopy.length % 3));
 
   return (

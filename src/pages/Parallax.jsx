@@ -67,14 +67,14 @@ const ParallaxPage = props => {
             {q.text}
           </TextLayer>
         ))}
-        <ParallaxLayer offset={0.1} speed={1.5}>
+        <ParallaxLayer offset={0.1} speed={2}>
           <img
             src={props.imagesList[10].src}
             alt={props.imagesList[10].credit}
             style={{ marginLeft: "15vw" }}
           />
         </ParallaxLayer>
-        <ParallaxLayer offset={0.7} speed={2}>
+        <ParallaxLayer offset={0.5} speed={1.5}>
           <img
             src={props.imagesList[5].src}
             alt={props.imagesList[5].credit}

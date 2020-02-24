@@ -1,25 +1,34 @@
 import React from "react";
-import { Grid, Typography, Tooltip, Paper, Container } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Tooltip,
+  Container,
+  Box
+} from "@material-ui/core";
 
 const Hero = props => {
   return (
     <Grid item xs={12} container className={props.classes.headerContainer}>
-      <Container component="header" className={props.classes.header}>
-        <Tooltip title={props.imagesList[0].credit}>
-          <img
-            className={props.classes.headerImg}
-            src={props.imagesList[0].src}
-            alt={props.imagesList[0].credit}
-          />
-        </Tooltip>
-        <Paper elevation={0}>
-          <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+      <Tooltip title={props.imagesList[16].credit} placement="right">
+        <Container
+          disableGutters
+          maxWidth={false}
+          component="header"
+          className={props.classes.header}
+        >
+          <Typography variant="subtitle1">
+            "But I don't want comfort. I want God, I want poetry, I want real
+            danger, I want freedom, I want goodness. I want sin."
+            <br /> "In fact," said Mustapha Mond, "you're claiming the right to
+            be unhappy."
+            <br />
+            "All right then," said the Savage defiantly, "I'm claiming the right
+            to be unhappy." <br />
+            <Box fontWeight="fontWeightBold">-Brave New World</Box>
           </Typography>
-        </Paper>
-      </Container>
+        </Container>
+      </Tooltip>
     </Grid>
   );
 };
